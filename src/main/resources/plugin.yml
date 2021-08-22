@@ -1,0 +1,54 @@
+name: ${project.artifactId}
+version: ${project.version}
+prefix: ${project.artifactId}
+author: 4drian3d
+main: net.dreamerzero.MiniChatAnnouncer.Announcer
+website: https://github.com/4drian3d/MiniChatAnnouncer
+description: >
+    Plugin created to send messages to the player 
+    and the server using the MiniMessage format. 
+    Originally made for Peruviankkit Network.
+api-version: 1.16
+commands:
+    # Chat Commands
+    announcechat:
+        description: This will announce a chat to all players.
+        permission: announcer.chat.global
+    selfchat:
+        description: This will announce a chat to the sender of the command.
+        permission: announcer.chat.self
+    worldchat:
+        aliases: [mundochat]
+        description: It will send an chat to the world in which the player is located.
+        permission: announcer.chat.world
+    sendMessage:
+        description: Sends an chat to a specific player.
+        permission: announcer.chat.send
+permissions:
+    announcer.*:
+        description: A permission that gives access to all plugin commands.
+        default: op
+        children:
+            announcer.chat.*: true
+    # Chat Permissions
+    announcer.chat.*:
+        description: Permission giving access to all commands to send chats
+        default: false
+        children:
+            announcer.chat.global: true
+            announcer.chat.self: true
+            announcer.chat.world: true
+            announcer.chat.send: true
+    announcer.chat.global:
+        description: Announce an message to the entire server.
+        default: false
+    announcer.chat.self:
+        description: Send an message only to the player who has sent it.
+        default: false
+    announcer.chat.world:
+        description: Sends an message to the world in which the command was executed.
+        default: false
+    announcer.chat.send:
+        description: Sends an message to a specific player.
+        default: false
+    
