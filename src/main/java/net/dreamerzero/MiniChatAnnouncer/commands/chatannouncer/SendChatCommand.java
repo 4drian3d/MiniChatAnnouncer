@@ -19,13 +19,6 @@ public class SendChatCommand implements CommandExecutor {
 
     // Command
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        // It will send an chat to the world in which the command is executed, 
-        // it makes no sense for the console to execute it.
-        if (!(sender instanceof Player)) {
-            plugin.getLogger().info("The console cannot execute this command.");
-            return false;
-        }
-
         // Permission Check
         if (!(sender.hasPermission("announcer.chat.send"))){
             sender.sendMessage(
@@ -40,8 +33,6 @@ public class SendChatCommand implements CommandExecutor {
                     plugin.getConfig().getString("messages.chat.only-player")));
             return false;
         }
-
-        var player = (Player) sender;
 
         // Get the player
         var playerObjetive = Bukkit.getPlayer(args[0]);
@@ -66,12 +57,23 @@ public class SendChatCommand implements CommandExecutor {
         // Convert StringBuilder to String, Component is not compatible :nimodo:
         var chattoparse = chattext.toString();
 
-        // Send to all
-        playerObjetive.sendMessage(
-            MiniMessageUtil.parse(chattoparse, replacePlaceholders(player, playerObjetive)));
-        sender.sendMessage(
-            MiniMessageUtil.parse(
-                plugin.getConfig().getString("messages.chat.successfully")));
+        if (sender instanceof Player) {
+            var player = (Player) sender;
+            // Send to all
+            playerObjetive.sendMessage(
+                MiniMessageUtil.parse(chattoparse, replacePlaceholders(player, playerObjetive)));
+            sender.sendMessage(
+                MiniMessageUtil.parse(
+                    plugin.getConfig().getString("messages.chat.successfully")));
+        } else {
+            // Send to all
+            playerObjetive.sendMessage(
+                MiniMessageUtil.parse(chattoparse, replacePlaceholders(playerObjetive)));
+            sender.sendMessage(
+                MiniMessageUtil.parse(
+                    plugin.getConfig().getString("messages.chat.successfully")));
+        }
+        
 
         var soundtoplay = plugin.getConfig().getString("sounds.chat.sound-id", "entity.experience_orb.pickup");
         var soundEnabled = plugin.getConfig().getBoolean("sounds.chat.enabled", true);
