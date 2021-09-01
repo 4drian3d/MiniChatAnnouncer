@@ -59,7 +59,6 @@ public class AnnouncerChatCommand implements CommandExecutor {
                     plugin.getConfig().getString("messages.chat.successfully")));
         }
         
-
         var soundtoplay = plugin.getConfig().getString("sounds.chat.sound-id", "entity.experience_orb.pickup");
         var soundEnabled = plugin.getConfig().getBoolean("sounds.chat.enabled", true);
         float volume = plugin.getConfig().getInt("sounds.chat.volume", 10);

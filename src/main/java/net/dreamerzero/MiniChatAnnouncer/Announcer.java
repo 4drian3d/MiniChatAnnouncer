@@ -63,7 +63,7 @@ public class Announcer extends JavaPlugin {
 		// Chat Commands
 		getCommand("announcechat")
 			.setExecutor(new AnnouncerChatCommand(this));
-		getCommand("testchat")
+		getCommand("selfchat")
 			.setExecutor(new SelfChatCommand(this));
 		getCommand("worldchat")
 			.setExecutor(new WorldChatCommand(this));
