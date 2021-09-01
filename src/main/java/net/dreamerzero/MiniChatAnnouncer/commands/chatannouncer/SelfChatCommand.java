@@ -16,15 +16,6 @@ public class SelfChatCommand implements CommandExecutor {
 		this.plugin = plugin;
 	}
 
-    // Default Sound
-    String soundtoplay = "entity.experience_orb.pickup";
-    // Is Enabled?
-    Boolean soundEnabled = true;
-    // Volume
-    float volume = 10f;
-    // Pitch
-    float pitch = 2f;
-
     //Command
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         // It will send an chat to the one who executes the command, 
@@ -50,7 +41,7 @@ public class SelfChatCommand implements CommandExecutor {
         }
         
         // Convert StringBuilder to String, Component is not compatible :nimodo:
-        String chattoparse = chattext.toString();
+        var chattoparse = chattext.toString();
 
         var player = (Player) sender;
         
@@ -61,10 +52,10 @@ public class SelfChatCommand implements CommandExecutor {
             MiniMessageUtil.parse(
                 plugin.getConfig().getString("messages.chat.successfully")));
 
-        soundtoplay = plugin.getConfig().getString("sounds.chat.sound-id");
-        soundEnabled = plugin.getConfig().getBoolean("sounds.chat.enabled");
-        volume = plugin.getConfig().getInt("sounds.chat.volume");
-        pitch = plugin.getConfig().getInt("sounds.chat.pitch");
+        String soundtoplay = plugin.getConfig().getString("sounds.chat.sound-id", "entity.experience_orb.pickup");
+        boolean soundEnabled = plugin.getConfig().getBoolean("sounds.chat.enabled", true);
+        float volume = plugin.getConfig().getInt("sounds.chat.volume", 10);
+        float pitch = plugin.getConfig().getInt("sounds.chat.pitch", 2);
 
         if (soundEnabled) {
             // Play the sound

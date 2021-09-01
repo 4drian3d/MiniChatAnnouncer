@@ -17,15 +17,6 @@ public class WorldChatCommand implements CommandExecutor {
 		this.plugin = plugin;
 	}
 
-    // Default Sound
-    String soundtoplay = "entity.experience_orb.pickup";
-    // Is Enabled?
-    Boolean soundEnabled = true;
-    // Volume
-    float volume = 10f;
-    // Pitch
-    float pitch = 2f;
-
     // Command
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         // It will send an chat to the world in which the command is executed, 
@@ -36,7 +27,7 @@ public class WorldChatCommand implements CommandExecutor {
         }
 
         // Player
-        Player player = (Player) sender;
+        var player = (Player) sender;
 
         // Permission Check
         if (!(player.hasPermission("announcer.chat.world"))){
@@ -57,7 +48,7 @@ public class WorldChatCommand implements CommandExecutor {
         }
         
         // Convert StringBuilder to String, Component is not compatible :nimodo:
-        String chattoparse = chattext.toString();
+        var chattoparse = chattext.toString();
         
         // Send to all
         audience.sendMessage(
@@ -66,10 +57,10 @@ public class WorldChatCommand implements CommandExecutor {
             MiniMessageUtil.parse(
                 plugin.getConfig().getString("messages.chat.successfully")));
 
-        soundtoplay = plugin.getConfig().getString("sounds.chat.sound-id");
-        soundEnabled = plugin.getConfig().getBoolean("sounds.chat.enabled");
-        volume = plugin.getConfig().getInt("sounds.chat.volume");
-        pitch = plugin.getConfig().getInt("sounds.chat.pitch");
+        var soundtoplay = plugin.getConfig().getString("sounds.chat.sound-id", "entity.experience_orb.pickup");
+        var soundEnabled = plugin.getConfig().getBoolean("sounds.chat.enabled", true);
+        float volume = plugin.getConfig().getInt("sounds.chat.volume", 10);
+        float pitch = plugin.getConfig().getInt("sounds.chat.pitch", 2);
                 
         if (soundEnabled) {
             // Play the sound
