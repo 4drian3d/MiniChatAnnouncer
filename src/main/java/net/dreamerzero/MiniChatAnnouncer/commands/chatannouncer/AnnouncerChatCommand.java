@@ -4,10 +4,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import net.dreamerzero.MiniChatAnnouncer.Announcer;
 import net.dreamerzero.MiniChatAnnouncer.utils.MiniMessageUtil;
 import net.dreamerzero.MiniChatAnnouncer.utils.SoundUtil;
+import static net.dreamerzero.MiniChatAnnouncer.utils.PlaceholderUtil.replacePlaceholders;
 
 import net.kyori.adventure.audience.Audience;
 
@@ -39,6 +41,8 @@ public class AnnouncerChatCommand implements CommandExecutor {
             return true;
         }
 
+        Player player = (Player) sender;
+
         // Concatenate the arguments provided by the command sent.
         StringBuilder chattext = new StringBuilder();
         for (byte i = 0; i < args.length; i++) {
@@ -51,7 +55,7 @@ public class AnnouncerChatCommand implements CommandExecutor {
         
         // Send to all
         audience.sendMessage(
-            MiniMessageUtil.parse(chattoparse));
+            MiniMessageUtil.parse(chattoparse, replacePlaceholders(player)));
         sender.sendMessage(
             MiniMessageUtil.parse(
                 plugin.getConfig().getString("messages.chat.successfully")));

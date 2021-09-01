@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import net.dreamerzero.MiniChatAnnouncer.Announcer;
 import net.dreamerzero.MiniChatAnnouncer.utils.MiniMessageUtil;
 import net.dreamerzero.MiniChatAnnouncer.utils.SoundUtil;
+import static net.dreamerzero.MiniChatAnnouncer.utils.PlaceholderUtil.replacePlaceholders;
 
 public class SelfChatCommand implements CommandExecutor {
     private Announcer plugin;
@@ -50,10 +51,12 @@ public class SelfChatCommand implements CommandExecutor {
         
         // Convert StringBuilder to String, Component is not compatible :nimodo:
         String chattoparse = chattext.toString();
+
+        var player = (Player) sender;
         
         // Send to sender
         sender.sendMessage(
-            MiniMessageUtil.parse(chattoparse));
+            MiniMessageUtil.parse(chattoparse, replacePlaceholders(player)));
         sender.sendMessage(
             MiniMessageUtil.parse(
                 plugin.getConfig().getString("messages.chat.successfully")));

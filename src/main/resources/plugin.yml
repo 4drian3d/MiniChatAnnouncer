@@ -21,7 +21,7 @@ commands:
         aliases: [mundochat]
         description: It will send an chat to the world in which the player is located.
         permission: announcer.chat.world
-    sendMessage:
+    sendchat:
         description: Sends an chat to a specific player.
         permission: announcer.chat.send
 permissions:

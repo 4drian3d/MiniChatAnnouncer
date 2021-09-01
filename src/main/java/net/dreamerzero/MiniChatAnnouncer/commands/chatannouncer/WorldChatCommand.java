@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import net.dreamerzero.MiniChatAnnouncer.Announcer;
 import net.dreamerzero.MiniChatAnnouncer.utils.MiniMessageUtil;
 import net.dreamerzero.MiniChatAnnouncer.utils.SoundUtil;
+import static net.dreamerzero.MiniChatAnnouncer.utils.PlaceholderUtil.replacePlaceholders;
 import net.kyori.adventure.audience.Audience;
 
 public class WorldChatCommand implements CommandExecutor {
@@ -60,7 +61,7 @@ public class WorldChatCommand implements CommandExecutor {
         
         // Send to all
         audience.sendMessage(
-            MiniMessageUtil.parse(chattoparse));
+            MiniMessageUtil.parse(chattoparse, replacePlaceholders(player)));
         sender.sendMessage(
             MiniMessageUtil.parse(
                 plugin.getConfig().getString("messages.chat.successfully")));

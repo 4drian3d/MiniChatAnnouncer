@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import net.dreamerzero.MiniChatAnnouncer.Announcer;
 import net.dreamerzero.MiniChatAnnouncer.utils.MiniMessageUtil;
 import net.dreamerzero.MiniChatAnnouncer.utils.SoundUtil;
+import static net.dreamerzero.MiniChatAnnouncer.utils.PlaceholderUtil.replacePlaceholders;
 
 public class SendChatCommand implements CommandExecutor {
     private Announcer plugin;
@@ -49,6 +50,8 @@ public class SendChatCommand implements CommandExecutor {
             return false;
         }
 
+        Player player = (Player) sender;
+
         // Get the player
         Player playerObjetive = Bukkit.getPlayer(args[0]);
 
@@ -74,7 +77,7 @@ public class SendChatCommand implements CommandExecutor {
 
         // Send to all
         playerObjetive.sendMessage(
-            MiniMessageUtil.parse(chattoparse));
+            MiniMessageUtil.parse(chattoparse, replacePlaceholders(player, playerObjetive)));
         sender.sendMessage(
             MiniMessageUtil.parse(
                 plugin.getConfig().getString("messages.chat.successfully")));
