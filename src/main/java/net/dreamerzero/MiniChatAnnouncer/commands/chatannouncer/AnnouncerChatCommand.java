@@ -34,14 +34,13 @@ public class AnnouncerChatCommand implements CommandExecutor {
 
         // Concatenate the arguments provided by the command sent.
         StringBuilder chattext = new StringBuilder();
-        for (byte i = 0; i < args.length; i++) {
-            chattext = chattext.append(" ");
-            chattext = chattext.append(args[i]); 
+        for (String argument : args) {
+            chattext = chattext.append(" ").append(argument);
         }
 
         // Convert StringBuilder to String, Component is not compatible :nimodo:
         var chattoparse = chattext.toString();
-        
+
         if (sender instanceof Player) {
             var player = (Player) sender;
             // Send to all
@@ -58,7 +57,7 @@ public class AnnouncerChatCommand implements CommandExecutor {
                 MiniMessageUtil.parse(
                     plugin.getConfig().getString("messages.chat.successfully")));
         }
-        
+
         var soundtoplay = plugin.getConfig().getString("sounds.chat.sound-id", "entity.experience_orb.pickup");
         var soundEnabled = plugin.getConfig().getBoolean("sounds.chat.enabled", true);
         float volume = plugin.getConfig().getInt("sounds.chat.volume", 10);

@@ -33,7 +33,7 @@ public class Announcer extends JavaPlugin {
 	static final TextComponent linelong = 
 		Component.text("----------------------", 
 			NamedTextColor.DARK_GRAY);
-	
+
 	@Override
 	public void onEnable() {
 		Bukkit.getConsoleSender().sendMessage(linelong);

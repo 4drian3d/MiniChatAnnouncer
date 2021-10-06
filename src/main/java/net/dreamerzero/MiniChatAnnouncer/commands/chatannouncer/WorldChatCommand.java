@@ -42,14 +42,13 @@ public class WorldChatCommand implements CommandExecutor {
 
         // Concatenate the arguments provided by the command sent.
         StringBuilder chattext = new StringBuilder();
-        for (byte i = 0; i < args.length; i++) {
-            chattext = chattext.append(" ");
-            chattext = chattext.append(args[i]); 
+        for (String argument : args) {
+            chattext = chattext.append(" ").append(argument);
         }
-        
+
         // Convert StringBuilder to String, Component is not compatible :nimodo:
         var chattoparse = chattext.toString();
-        
+
         // Send to all
         audience.sendMessage(
             MiniMessageUtil.parse(chattoparse, replacePlaceholders(player)));
@@ -61,7 +60,7 @@ public class WorldChatCommand implements CommandExecutor {
         var soundEnabled = plugin.getConfig().getBoolean("sounds.chat.enabled", true);
         float volume = plugin.getConfig().getInt("sounds.chat.volume", 10);
         float pitch = plugin.getConfig().getInt("sounds.chat.pitch", 2);
-                
+
         if (soundEnabled) {
             // Play the sound
             SoundUtil.playSound(

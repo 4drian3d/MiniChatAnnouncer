@@ -14,18 +14,18 @@ public class MiniMessageUtil {
     public static Component parse(
         final String message) {
 
-        return MiniMessage.get().parse(message);
+        return MiniMessage.miniMessage().parse(message);
     }
 
     public static Component parse(
         final String message, Template template) {
 
-        return MiniMessage.get().parse(message, template);
+        return MiniMessage.miniMessage().parse(message, template);
     }
 
     public static Component parse(
         final String message, List<Template> template) {
 
-        return MiniMessage.get().parse(message, template);
+        return MiniMessage.miniMessage().parse(message, template);
     }
 }

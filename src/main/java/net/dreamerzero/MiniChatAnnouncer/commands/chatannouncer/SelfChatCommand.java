@@ -35,9 +35,8 @@ public class SelfChatCommand implements CommandExecutor {
         
         // Concatenate the arguments provided by the command sent.
         StringBuilder chattext = new StringBuilder();
-        for (byte i = 0; i < args.length; i++) {
-            chattext = chattext.append(" ");
-            chattext = chattext.append(args[i]); 
+        for (String argument : args) {
+            chattext = chattext.append(" ").append(argument);
         }
         
         // Convert StringBuilder to String, Component is not compatible :nimodo:

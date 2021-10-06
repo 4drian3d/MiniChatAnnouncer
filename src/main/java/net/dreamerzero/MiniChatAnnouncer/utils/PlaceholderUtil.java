@@ -9,7 +9,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.Template;
 
-import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.Component.*;
 
 public class PlaceholderUtil {
     /**
@@ -59,7 +59,7 @@ public class PlaceholderUtil {
     public static List<Template> replacePlaceholders(Player player, Player otherPlayer) {
         final String mspt = String.valueOf(Bukkit.getAverageTickTime()/20).substring(0, 3);
         final String tps = String.valueOf(Bukkit.getTPS()[0]).substring(0, 4);
-        
+
         final List<Template> templates = List.of(
             Template.of("name", text(player.getName())), 
             Template.of("ping", text(player.getPing())),
@@ -70,8 +70,8 @@ public class PlaceholderUtil {
             Template.of("otherworld", text(otherPlayer.getName())),
             Template.of("mspt", text(String.valueOf(mspt))),
             Template.of("tps", text(String.valueOf(tps))),
-            Template.of("item", text("item", NamedTextColor.BLUE, TextDecoration.UNDERLINED).hoverEvent(player.getInventory().getItemInMainHand())),
-            Template.of("otheritem", text("item", NamedTextColor.BLUE, TextDecoration.UNDERLINED).hoverEvent(otherPlayer.getInventory().getItemInMainHand())));
+            Template.of("item", translatable(player.getInventory().getItemInMainHand().translationKey()).hoverEvent(player.getInventory().getItemInMainHand().asHoverEvent())),
+            Template.of("otheritem", translatable(otherPlayer.getInventory().getItemInMainHand().translationKey()).hoverEvent(otherPlayer.getInventory().getItemInMainHand().asHoverEvent())));
         return templates;
     }
 }
